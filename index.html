@@ -1,203 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DOB Lookup</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 30px;
-      background-color: #f0f0f0;
-    }
-    h2 {
-      color: #333;
-    }
-    input, button {
-      padding: 10px;
-      margin-top: 10px;
-      display: block;
-      font-size: 16px;
-      width: 100%;
-      max-width: 300px;
-    }
-    #result {
-      margin-top: 20px;
-      font-weight: bold;
-      color: #006600;
-    }
-  </style>
-</head>
-<body>
-    <h1>SCHOOL CODE: 11032</H1>
-  <h2>Find Your PIN</h2>
-
-  <label for="name">Enter Your SCS Name:</label>
-  <input type="text" id="name" placeholder="e.g., SCS1325023" />
-
-  <label for="mobile">Enter Your Roll Number:</label>
-  <input type="text" id="mobile" placeholder="e.g., 11203664" />
-
-  <button onclick="lookupDOB()">FIND</button>
-
-  <div id="result"></div>
-  <hr>
-  <div>For 12th class  <a href="index12th.html"> Click Here </a> </div>
-  <hr>
-  <h6>Any issue regarding website not working or incorrect information contact Whatsapp <a href="wa.me/+91807869243">+918078690243</a></h6>
-  <script>
-    // Sample static user database
-    const users = [
-      { name:"SCS1325023", mobile:"11203664", dob:"'416092'"},
-{ name:"SCS1321335", mobile:"11203665", dob:"'398021'"},
-{ name:"SCS1581811", mobile:"11203680", dob:"'023541'"},
-{ name:"SCS1321337",mobile:"11203668", dob:"'016582'"},
-{ name:"SCS1321340",mobile:"11203666", dob:"'936047'"},
-{ name:"SCS1606225",mobile:"11203690", dob:"'387209'"},
-{ name:"SCS1351112",mobile:"11203649", dob:"'608234'"},
-{ name:"SCS1447403",mobile:"11203667", dob:"'095473'"},
-{ name:"SCS1553061",mobile:"11203686", dob:"'078139'"},
-{ name:"SCS1404675",mobile:"11203650", dob:"'627350'"},
-{ name:"SCS1375928",mobile:"11203607", dob:"'806123'"},
-{ name:"SCS1620286",mobile:"11203684", dob:"'013925'"},
-{ name:"SCS1321345",mobile:"11203616", dob:"'429506'"},
-{ name:"SCS1321349",mobile:"11203674", dob:"'840579'"},
-{ name:"SCS1552322",mobile:"11203687", dob:"'403179'"},
-{ name:"SCS1321356",mobile:"11203672", dob:"'732846'"},
-{ name:"SCS1569485",mobile:"11203685", dob:"'206185'"},
-{ name:"SCS1406655",mobile:"11203620", dob:"'175430'"},
-{ name:"SCS1408564",mobile:"11203619", dob:"'164903'"},
-{ name:"SCS1321367",mobile:"11203608", dob:"'840651'"},
-{ name:"SCS1321371",mobile:"11203622", dob:"'064851'"},
-{ name:"SCS1321373",mobile:"11203617", dob:"'561974'"},
-{ name:"SCS1380009",mobile:"11203621", dob:"'425376'"},
-{ name:"SCS1364313",mobile:"11203618", dob:"'504619'"},
-{ name:"SCS1321381",mobile:"11203609", dob:"'517436'"},
-{ name:"SCS1328770",mobile:"11203610", dob:"'591034'"},
-{ name:"SCS1336665",mobile:"11203624", dob:"'837514'"},
-{ name:"SCS1384327",mobile:"11203611", dob:"'371265'"},
-{ name:"SCS1321383",mobile:"11203636", dob:"'139475'"},
-{ name:"SCS1321386",mobile:"11203623", dob:"'481253'"},
-{ name:"SCS1389486",mobile:"11203625", dob:"'014863'"},
-{ name:"SCS1321389",mobile:"11203673", dob:"'281947'"},
-{ name:"SCS1321393",mobile:"11203651", dob:"'762185'"},
-{ name:"SCS1595890",mobile:"11203643", dob:"'096352'"},
-{ name:"SCS1369495",mobile:"11203652", dob:"'562097'"},
-{ name:"SCS1321400",mobile:"11203642", dob:"'056937'"},
-{ name:"SCS1416822",mobile:"11203626", dob:"'365418'"},
-{ name:"SCS1321405",mobile:"11203653", dob:"'597462'"},
-{ name:"SCS1321409",mobile:"11203670", dob:"'532416'"},
-{ name:"SCS1321469",mobile:"11203654", dob:"'307529'"},
-{ name:"SCS1638673",mobile:"11203681", dob:"'417268'"},
-{ name:"SCS1620246",mobile:"11203689", dob:"'603871'"},
-{ name:"SCS1327933",mobile:"11203669", dob:"'013627'"},
-{ name:"SCS1510818",mobile:"11203612", dob:"'382415'"},
-{ name:"SCS1544481",mobile:"11203645", dob:"'579016'"},
-{ name:"SCS1321413",mobile:"11203679", dob:"'518403'"},
-{ name:"SCS1362753",mobile:"11203655", dob:"'293478'"},
-{ name:"SCS1321416",mobile:"11203637", dob:"'293810'"},
-{ name:"SCS1544501",mobile:"11203644", dob:"'649857'"},
-{ name:"SCS1380714",mobile:"11203629", dob:"'103562'"},
-{ name:"SCS1322991",mobile:"11203675", dob:"'470385'"},
-{ name:"SCS1321423",mobile:"11203676", dob:"'496385'"},
-{ name:"SCS1321429",mobile:"11203641", dob:"'046182'"},
-{ name:"SCS1332637",mobile:"11203662", dob:"'980671'"},
-{ name:"SCS1416644",mobile:"11203678", dob:"'806719'"},
-{ name:"SCS1461614",mobile:"11203627", dob:"'052481'"},
-{ name:"SCS1321434",mobile:"11203656", dob:"'045376'"},
-{ name:"SCS1325180",mobile:"11203657", dob:"'495081'"},
-{ name:"SCS1321438",mobile:"11203628", dob:"'237468'"},
-{ name:"SCS1321440",mobile:"11203613", dob:"'934025'"},
-{ name:"SCS1551367",mobile:"11203647", dob:"'682754'"},
-{ name:"SCS1408673",mobile:"11203659", dob:"'875210'"},
-{ name:"SCS1545058",mobile:"11203682", dob:"'710893'"},
-{ name:"SCS1408571",mobile:"11203658", dob:"'325786'"},
-{ name:"SCS1403945",mobile:"11203660", dob:"'061732'"},
-{ name:"SCS1321447",mobile:"11203671", dob:"'251436'"},
-{ name:"SCS1321451",mobile:"11203640", dob:"'316894'"},
-{ name:"SCS1321452",mobile:"11203630", dob:"'039284'"},
-{ name:"SCS1321453",mobile:"11203632", dob:"'709426'"},
-{ name:"SCS1502941",mobile:"11203631", dob:"'802431'"},
-{ name:"SCS1321455",mobile:"11203677", dob:"'254071'"},
-{ name:"SCS1630064",mobile:"11203646", dob:"'723016'"},
-{ name:"SCS1405829",mobile:"11203634", dob:"'607934'"},
-{ name:"SCS1708436",mobile:"11203688", dob:"'748156'"},
-{ name:"SCS1351096",mobile:"11203614", dob:"'516924'"},
-{ name:"SCS1322993",mobile:"11203633", dob:"'528761'"},
-{ name:"SCS1610176",mobile:"11203691", dob:"'621935'"},
-{ name:"SCS1392060",mobile:"11203639", dob:"'980516'"},
-{ name:"SCS1321460",mobile:"11203661", dob:"'209568'"},
-{ name:"SCS1585621",mobile:"11203648", dob:"'534209'"},
-{ name:"SCS1366732",mobile:"11203635", dob:"'470153'"},
-{ name:"SCS1321464",mobile:"11203638", dob:"'574013'"},
-{ name:"SCS1610377",mobile:"11203683", dob:"'625341'"},
-{ name:"SCS1362148",mobile:"11203663", dob:"'061327'"},
-{ name:"SCS1321465",mobile:"11203615", dob:"'835621'"}
-{ name:"SCS1321404",mobile:"11686176",dob:"576130" },
-{ name:"SCS1321406",mobile:"11686177",dob:"297108" },
-      { name:"SCS1399710",mobile:"11686178",dob:"839615" },
-      { name:"SCS1321412",mobile:"11686179",dob:"830457" },
-      { name:"SCS1359828",mobile:"11686180",dob:"613748" },
-      { name:"SCS1500425",mobile:"11686181",dob:"043962" },
-      { name:"SCS1502560",mobile:"11686182",dob:"358247" },
-      { name:"SCS1321427",mobile:"11686183",dob:"152879" },
-      { name:"SCS1321428",mobile:"11686184",dob:"790148" },
-      { name:"SCS1506469",mobile:"11686185",dob:"190845" },
-      { name:"SCS1444786",mobile:"11686186",dob:"095762" },
-      { name:"SCS1508670",mobile:"11686220",dob:"016382" },
-      { name:"SCS1321435",mobile:"11686187",dob:"086219" },
-      { name:"SCS1340831",mobile:"11686188",dob:"593708" },
-      { name:"SCS1502568",mobile:"11686189",dob:"407916" },
-      { name:"SCS1365533",mobile:"11686190",dob:"208641" },
-      { name:"SCS1321436",mobile:"11686191",dob:"516470" },
-      { name:"SCS1402798",mobile:"11686192",dob:"246359" },
-      { name:"SCS1443604",mobile:"11686193",dob:"286039" },
-      { name:"SCS1321437",mobile:"11686194",dob:"168403" },
-      { name:"SCS1365135",mobile:"11686195",dob:"153967" },
-      { name:"SCS1516036",mobile:"11686196",dob:"431769" },
-      { name:"SCS1444807",mobile:"11686212",dob:"210346" },
-      { name:"SCS1459097",mobile:"11686223",dob:"208165" },
-      { name:"SCS1418197",mobile:"11686197",dob:"305769" },
-      { name:"SCS1321444",mobile:"11686198",dob:"540896" },
-      { name:"SCS1480369",mobile:"11686199",dob:"698253" },
-{ name:"SCS1350359",mobile:"11686200",dob:"016792" },
-      { name:"SCS1486370",mobile:"11686201",dob:"782965" },
-      { name:"SCS1321441",mobile:"11686202",dob:"947850" },
-      { name:"SCS1453165",mobile:"11686215",dob:"185960" },
-      { name:"SCS1321454",mobile:"11686216",dob:"071539" },
-      { name:"SCS1463068",mobile:"11686203",dob:"568140" },
-      { name:"SCS1321616",mobile:"11686204",dob:"814279" },
-      { name:"SCS1321621",mobile:"11686205",dob:"491265" },
-      { name:"SCS1444795",mobile:"11686206",dob:"234687" },
-      { name:"SCS1321622",mobile:"11686207",dob:"832196" },
-      { name:"SCS1321624",mobile:"11686208",dob:"865034" },
-      { name:"SCS1321627",mobile:"11686209",dob:"807415" },
-      { name:"SCS1321643",mobile:"11686210",dob:"802973" },
-      { name:"SCS1511895",mobile:"11686222",dob:"764590" },
-      { name:"SCS1321645",mobile:"11686211",dob:"453209" },
-      { name:"SCS1521226",mobile:"11686221",dob:"705864" },
-      { name:"SCS1486426",mobile:"11686213",dob:"735986" },
-      { name:"SCS1517640",mobile:"11686218",dob:"346128" },
-      { name:"SCS1494329",mobile:"11686217",dob:"956810" },
-      { name:"SCS1321656",mobile:"11686219",dob:"632785" },
-      { name:"SCS1321659",mobile:"11686214",dob:"631597" },
-      
-    ];
-
-    function lookupDOB() {
-      const nameInput = document.getElementById("name").value.trim();
-      const mobileInput = document.getElementById("mobile").value.trim();
-      const resultDiv = document.getElementById("result");
-
-      const user = users.find(u => u.name === nameInput && u.mobile === mobileInput);
-
-      if (user) {
-        resultDiv.textContent = `STUDENT ${user.name}, your PIN is ${user.dob}`;
-      } else {
-        resultDiv.textContent = "No record found. Please check your name and mobile number.";
-      }
-    }
-  </script>
-
-</body>
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <title>DOB Lookup</title>
+      <style>
+         body {
+         font-family: Arial, sans-serif;
+         padding: 30px;
+         background-color: #f0f0f0;
+         }
+         h2 {
+         color: #333;
+         }
+         input, button {
+         padding: 10px;
+         margin-top: 10px;
+         display: block;
+         font-size: 16px;
+         width: 100%;
+         max-width: 300px;
+         }
+         #result {
+         margin-top: 20px;
+         font-weight: bold;
+         color: #006600;
+         }
+      </style>
+   </head>
+   <body>
+      <h1>SCHOOL CODE: 11032</H1>
+      <h2>Find Your PIN</h2>
+      <label for="name">Enter Your SCS Name:</label>
+      <input type="text" id="name" placeholder="e.g., SCS1325023" />
+      <label for="mobile">Enter Your Roll Number:</label>
+      <input type="text" id="mobile" placeholder="e.g., 11203664" />
+      <button onclick="lookupDOB()">FIND</button>
+      <div id="result"></div>
+      <hr>
+      <div>For 12th class  <a href="index12th.html"> Click Here </a> </div>
+      <hr>
+      <h6>Any issue regarding website not working or incorrect information contact Whatsapp <a href="wa.me/+91807869243">+918078690243</a></h6>
+      <script>
+         // Sample static user database
+         const users = [
+           { name:"SCS1325023", mobile:"11203664", dob:"'416092'"},
+         { name:"SCS1321335", mobile:"11203665", dob:"'398021'"},
+         { name:"SCS1581811", mobile:"11203680", dob:"'023541'"},
+         { name:"SCS1321337",mobile:"11203668", dob:"'016582'"},
+         { name:"SCS1321340",mobile:"11203666", dob:"'936047'"},
+         { name:"SCS1606225",mobile:"11203690", dob:"'387209'"},
+         { name:"SCS1351112",mobile:"11203649", dob:"'608234'"},
+         { name:"SCS1447403",mobile:"11203667", dob:"'095473'"},
+         { name:"SCS1553061",mobile:"11203686", dob:"'078139'"},
+         { name:"SCS1404675",mobile:"11203650", dob:"'627350'"},
+         { name:"SCS1375928",mobile:"11203607", dob:"'806123'"},
+         { name:"SCS1620286",mobile:"11203684", dob:"'013925'"},
+         { name:"SCS1321345",mobile:"11203616", dob:"'429506'"},
+         { name:"SCS1321349",mobile:"11203674", dob:"'840579'"},
+         { name:"SCS1552322",mobile:"11203687", dob:"'403179'"},
+         { name:"SCS1321356",mobile:"11203672", dob:"'732846'"},
+         { name:"SCS1569485",mobile:"11203685", dob:"'206185'"},
+         { name:"SCS1406655",mobile:"11203620", dob:"'175430'"},
+         { name:"SCS1408564",mobile:"11203619", dob:"'164903'"},
+         { name:"SCS1321367",mobile:"11203608", dob:"'840651'"},
+         { name:"SCS1321371",mobile:"11203622", dob:"'064851'"},
+         { name:"SCS1321373",mobile:"11203617", dob:"'561974'"},
+         { name:"SCS1380009",mobile:"11203621", dob:"'425376'"},
+         { name:"SCS1364313",mobile:"11203618", dob:"'504619'"},
+         { name:"SCS1321381",mobile:"11203609", dob:"'517436'"},
+         { name:"SCS1328770",mobile:"11203610", dob:"'591034'"},
+         { name:"SCS1336665",mobile:"11203624", dob:"'837514'"},
+         { name:"SCS1384327",mobile:"11203611", dob:"'371265'"},
+         { name:"SCS1321383",mobile:"11203636", dob:"'139475'"},
+         { name:"SCS1321386",mobile:"11203623", dob:"'481253'"},
+         { name:"SCS1389486",mobile:"11203625", dob:"'014863'"},
+         { name:"SCS1321389",mobile:"11203673", dob:"'281947'"},
+         { name:"SCS1321393",mobile:"11203651", dob:"'762185'"},
+         { name:"SCS1595890",mobile:"11203643", dob:"'096352'"},
+         { name:"SCS1369495",mobile:"11203652", dob:"'562097'"},
+         { name:"SCS1321400",mobile:"11203642", dob:"'056937'"},
+         { name:"SCS1416822",mobile:"11203626", dob:"'365418'"},
+         { name:"SCS1321405",mobile:"11203653", dob:"'597462'"},
+         { name:"SCS1321409",mobile:"11203670", dob:"'532416'"},
+         { name:"SCS1321469",mobile:"11203654", dob:"'307529'"},
+         { name:"SCS1638673",mobile:"11203681", dob:"'417268'"},
+         { name:"SCS1620246",mobile:"11203689", dob:"'603871'"},
+         { name:"SCS1327933",mobile:"11203669", dob:"'013627'"},
+         { name:"SCS1510818",mobile:"11203612", dob:"'382415'"},
+         { name:"SCS1544481",mobile:"11203645", dob:"'579016'"},
+         { name:"SCS1321413",mobile:"11203679", dob:"'518403'"},
+         { name:"SCS1362753",mobile:"11203655", dob:"'293478'"},
+         { name:"SCS1321416",mobile:"11203637", dob:"'293810'"},
+         { name:"SCS1544501",mobile:"11203644", dob:"'649857'"},
+         { name:"SCS1380714",mobile:"11203629", dob:"'103562'"},
+         { name:"SCS1322991",mobile:"11203675", dob:"'470385'"},
+         { name:"SCS1321423",mobile:"11203676", dob:"'496385'"},
+         { name:"SCS1321429",mobile:"11203641", dob:"'046182'"},
+         { name:"SCS1332637",mobile:"11203662", dob:"'980671'"},
+         { name:"SCS1416644",mobile:"11203678", dob:"'806719'"},
+         { name:"SCS1461614",mobile:"11203627", dob:"'052481'"},
+         { name:"SCS1321434",mobile:"11203656", dob:"'045376'"},
+         { name:"SCS1325180",mobile:"11203657", dob:"'495081'"},
+         { name:"SCS1321438",mobile:"11203628", dob:"'237468'"},
+         { name:"SCS1321440",mobile:"11203613", dob:"'934025'"},
+         { name:"SCS1551367",mobile:"11203647", dob:"'682754'"},
+         { name:"SCS1408673",mobile:"11203659", dob:"'875210'"},
+         { name:"SCS1545058",mobile:"11203682", dob:"'710893'"},
+         { name:"SCS1408571",mobile:"11203658", dob:"'325786'"},
+         { name:"SCS1403945",mobile:"11203660", dob:"'061732'"},
+         { name:"SCS1321447",mobile:"11203671", dob:"'251436'"},
+         { name:"SCS1321451",mobile:"11203640", dob:"'316894'"},
+         { name:"SCS1321452",mobile:"11203630", dob:"'039284'"},
+         { name:"SCS1321453",mobile:"11203632", dob:"'709426'"},
+         { name:"SCS1502941",mobile:"11203631", dob:"'802431'"},
+         { name:"SCS1321455",mobile:"11203677", dob:"'254071'"},
+         { name:"SCS1630064",mobile:"11203646", dob:"'723016'"},
+         { name:"SCS1405829",mobile:"11203634", dob:"'607934'"},
+         { name:"SCS1708436",mobile:"11203688", dob:"'748156'"},
+         { name:"SCS1351096",mobile:"11203614", dob:"'516924'"},
+         { name:"SCS1322993",mobile:"11203633", dob:"'528761'"},
+         { name:"SCS1610176",mobile:"11203691", dob:"'621935'"},
+         { name:"SCS1392060",mobile:"11203639", dob:"'980516'"},
+         { name:"SCS1321460",mobile:"11203661", dob:"'209568'"},
+         { name:"SCS1585621",mobile:"11203648", dob:"'534209'"},
+         { name:"SCS1366732",mobile:"11203635", dob:"'470153'"},
+         { name:"SCS1321464",mobile:"11203638", dob:"'574013'"},
+         { name:"SCS1610377",mobile:"11203683", dob:"'625341'"},
+         { name:"SCS1362148",mobile:"11203663", dob:"'061327'"},
+         { name:"SCS1321465",mobile:"11203615", dob:"'835621'"}
+         { name:"SCS1321404",mobile:"11686176",dob:"576130" },
+         { name:"SCS1321406",mobile:"11686177",dob:"297108" },
+           { name:"SCS1399710",mobile:"11686178",dob:"839615" },
+           { name:"SCS1321412",mobile:"11686179",dob:"830457" },
+           { name:"SCS1359828",mobile:"11686180",dob:"613748" },
+           { name:"SCS1500425",mobile:"11686181",dob:"043962" },
+           { name:"SCS1502560",mobile:"11686182",dob:"358247" },
+           { name:"SCS1321427",mobile:"11686183",dob:"152879" },
+           { name:"SCS1321428",mobile:"11686184",dob:"790148" },
+           { name:"SCS1506469",mobile:"11686185",dob:"190845" },
+           { name:"SCS1444786",mobile:"11686186",dob:"095762" },
+           { name:"SCS1508670",mobile:"11686220",dob:"016382" },
+           { name:"SCS1321435",mobile:"11686187",dob:"086219" },
+           { name:"SCS1340831",mobile:"11686188",dob:"593708" },
+           { name:"SCS1502568",mobile:"11686189",dob:"407916" },
+           { name:"SCS1365533",mobile:"11686190",dob:"208641" },
+           { name:"SCS1321436",mobile:"11686191",dob:"516470" },
+           { name:"SCS1402798",mobile:"11686192",dob:"246359" },
+           { name:"SCS1443604",mobile:"11686193",dob:"286039" },
+           { name:"SCS1321437",mobile:"11686194",dob:"168403" },
+           { name:"SCS1365135",mobile:"11686195",dob:"153967" },
+           { name:"SCS1516036",mobile:"11686196",dob:"431769" },
+           { name:"SCS1444807",mobile:"11686212",dob:"210346" },
+           { name:"SCS1459097",mobile:"11686223",dob:"208165" },
+           { name:"SCS1418197",mobile:"11686197",dob:"305769" },
+           { name:"SCS1321444",mobile:"11686198",dob:"540896" },
+           { name:"SCS1480369",mobile:"11686199",dob:"698253" },
+           { name:"SCS1350359",mobile:"11686200",dob:"016792" },
+           { name:"SCS1486370",mobile:"11686201",dob:"782965" },
+           { name:"SCS1321441",mobile:"11686202",dob:"947850" },
+           { name:"SCS1453165",mobile:"11686215",dob:"185960" },
+           { name:"SCS1321454",mobile:"11686216",dob:"071539" },
+           { name:"SCS1463068",mobile:"11686203",dob:"568140" },
+           { name:"SCS1321616",mobile:"11686204",dob:"814279" },
+           { name:"SCS1321621",mobile:"11686205",dob:"491265" },
+           { name:"SCS1444795",mobile:"11686206",dob:"234687" },
+           { name:"SCS1321622",mobile:"11686207",dob:"832196" },
+           { name:"SCS1321624",mobile:"11686208",dob:"865034" },
+           { name:"SCS1321627",mobile:"11686209",dob:"807415" },
+           { name:"SCS1321643",mobile:"11686210",dob:"802973" },
+           { name:"SCS1511895",mobile:"11686222",dob:"764590" },
+           { name:"SCS1321645",mobile:"11686211",dob:"453209" },
+           { name:"SCS1521226",mobile:"11686221",dob:"705864" },
+           { name:"SCS1486426",mobile:"11686213",dob:"735986" },
+           { name:"SCS1517640",mobile:"11686218",dob:"346128" },
+           { name:"SCS1494329",mobile:"11686217",dob:"956810" },
+           { name:"SCS1321656",mobile:"11686219",dob:"632785" },
+           { name:"SCS1321659",mobile:"11686214",dob:"631597" },
+           
+         ];
+         
+         function lookupDOB() {
+           const nameInput = document.getElementById("name").value.trim();
+           const mobileInput = document.getElementById("mobile").value.trim();
+           const resultDiv = document.getElementById("result");
+         
+           const user = users.find(u => u.name === nameInput && u.mobile === mobileInput);
+         
+           if (user) {
+             resultDiv.textContent = `STUDENT ${user.name}, your PIN is ${user.dob}`;
+           } else {
+             resultDiv.textContent = "No record found. Please check your name and mobile number.";
+           }
+         }
+      </script>
+   </body>
 </html>
